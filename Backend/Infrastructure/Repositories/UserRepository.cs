@@ -15,6 +15,7 @@ namespace Infrastructure.Repositories
         public async Task<Guid> CreateUser(User user)
         {
             await context.Users.AddAsync(user);
+            await context.Carts.AddAsync(new Cart { User = user });
             await context.SaveChangesAsync();
             return user.Id;
         }

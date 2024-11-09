@@ -14,6 +14,8 @@
 
         public int Review { get; set; }
 
+        public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
+
         public Product()
         {
         }

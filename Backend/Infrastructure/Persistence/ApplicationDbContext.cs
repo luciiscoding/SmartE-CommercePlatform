@@ -5,45 +5,60 @@ namespace Infrastructure.Persistence
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {
-        }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasPostgresExtension("uuid-ossp");
-            modelBuilder.Entity<Product>(
 
-                    entity =>
-                    {
-                        entity.ToTable("products");
-                        entity.HasKey(e => e.Id);
-                        entity.Property(e => e.Id)
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("uuid_generate_v4()")
-                        .ValueGeneratedOnAdd();
-                        entity.Property(entity => entity.Type).IsRequired().HasMaxLength(50);
-                        entity.Property(entity => entity.Name).IsRequired().HasMaxLength(100);
-                        entity.Property(entity => entity.Description).IsRequired();
-                        entity.Property(entity => entity.Price).IsRequired();
-                        entity.Property(entity => entity.Review).IsRequired();
-                    }
-                );
-            modelBuilder.Entity<User>(
-                    entity =>
-                    {
-                        entity.ToTable("users");
-                        entity.HasKey(e => e.Id);
-                        entity.Property(e => e.Id)
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("uuid_generate_v4()")
-                        .ValueGeneratedOnAdd();
-                        entity.Property(entity => entity.Username).IsRequired().HasMaxLength(30);
-                        entity.Property(entity => entity.Password).IsRequired();
-                        entity.Property(entity => entity.Email).IsRequired();
-                    }
-                );
+            modelBuilder.Entity<Product>(entity =>
+            {
+                entity.ToTable("products");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).HasColumnType("uuid")
+                      .HasDefaultValueSql("uuid_generate_v4()")
+                      .ValueGeneratedOnAdd();
+                entity.Property(e => e.Type).IsRequired().HasMaxLength(50);
+                entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Description).IsRequired();
+                entity.Property(e => e.Price).IsRequired();
+                entity.Property(e => e.Review).IsRequired();
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable("users");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).HasColumnType("uuid")
+                      .HasDefaultValueSql("uuid_generate_v4()")
+                      .ValueGeneratedOnAdd();
+                entity.Property(e => e.Username).IsRequired().HasMaxLength(30);
+                entity.Property(e => e.Password).IsRequired();
+                entity.Property(e => e.Email).IsRequired();
+
+                entity.HasOne(u => u.Cart)
+                      .WithOne(c => c.User)
+                      .HasForeignKey<Cart>(c => c.UserId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<Cart>(entity =>
+            {
+                entity.ToTable("carts");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).HasColumnType("uuid")
+                      .HasDefaultValueSql("uuid_generate_v4()")
+                      .ValueGeneratedOnAdd();
+                entity.Property(e => e.UserId).IsRequired();
+
+                entity.HasMany(c => c.Products)
+                      .WithMany(p => p.Carts)
+                      .UsingEntity(j => j.ToTable("cart_products"));
+            });
         }
     }
 }

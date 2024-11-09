@@ -13,9 +13,11 @@ namespace Domain.Entities
 
         public string Email {  get; set; }
 
+        public virtual Cart Cart { get; set; }
+
         public User()
-    {
-    }
+        {
+        }
 
     public User(Guid id, string username, string password, string email)
     {

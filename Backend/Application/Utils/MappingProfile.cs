@@ -1,4 +1,5 @@
-﻿using Application.DTOs.Product;
+﻿using Application.DTOs.Cart;
+using Application.DTOs.Product;
 using Application.DTOs.User;
 using AutoMapper;
 using Domain.Entities;
@@ -14,6 +15,8 @@ namespace Application.Utils
 
             CreateMap<User, UserDTO>().ReverseMap();
             CreateMap<User, CreateUserDTO>().ReverseMap();
+
+            CreateMap<Cart, CartDTO>().ReverseMap();
         }
     }
 }

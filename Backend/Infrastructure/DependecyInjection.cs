@@ -18,6 +18,7 @@ namespace Infrastructure
 
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
 
             return services;
         }
