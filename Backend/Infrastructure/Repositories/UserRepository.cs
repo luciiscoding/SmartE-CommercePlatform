@@ -46,5 +46,15 @@ namespace Infrastructure.Repositories
             context.Users.Update(user);
             await context.SaveChangesAsync();
         }
+
+        public async Task<Guid> LoginUser(User user)
+        {
+            var userResult = context.Users.FirstOrDefault(u => u.Username == user.Username && u.Password == user.Password);
+            if (userResult == null)
+            {
+                throw new Exception("User not found");
+            }
+            return userResult.Id;
+        }
     }
 }

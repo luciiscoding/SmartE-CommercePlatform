@@ -15,6 +15,7 @@ namespace Application.Utils
 
             CreateMap<User, UserDTO>().ReverseMap();
             CreateMap<User, CreateUserDTO>().ReverseMap();
+            CreateMap<User, LoginUserDTO>().ReverseMap();
 
             CreateMap<Cart, CartDTO>().ReverseMap();
         }

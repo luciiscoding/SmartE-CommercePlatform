@@ -5,10 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout';
 import { HttpClientModule } from '@angular/common/http';
-import { FeaturesModule } from './features/features.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FeaturesModule } from './features';
+import { CoreModule } from './core';
+import { SharedModule } from './shared';
 
-const SMART_E_COMMERCE_PLATORM_MODULES: any[] = [LayoutModule, FeaturesModule];
+const SMART_E_COMMERCE_PLATORM_MODULES: any[] = [
+  LayoutModule,
+  FeaturesModule,
+  CoreModule,
+  SharedModule,
+];
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,8 +23,8 @@ const SMART_E_COMMERCE_PLATORM_MODULES: any[] = [LayoutModule, FeaturesModule];
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    SMART_E_COMMERCE_PLATORM_MODULES,
     BrowserAnimationsModule,
+    SMART_E_COMMERCE_PLATORM_MODULES,
   ],
   providers: [],
   bootstrap: [AppComponent],
