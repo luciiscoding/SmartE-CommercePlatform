@@ -1,5 +1,9 @@
 <div class="header">
   <h1 class="header-title">
-    Welcome to Smart E-Commerce Platform!
+    Smart E-Commerce Platform
   </h1>
+  <div *ngIf="username !== ''" class="user-area">
+  <h4>Hello, {{username}}!</h4>
+  <mat-icon matTooltip="Logout" (click)="onLogoutClick()">logout</mat-icon>
+</div>
 </div>

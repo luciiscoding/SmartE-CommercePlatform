@@ -34,7 +34,7 @@ namespace SmartE_commercePlatform.Controllers
             var userId = await mediator.Send(new LoginUserQuery(user));
             return Ok(userId);
         }
-
+            
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO>> GetUserById(Guid id)
         {

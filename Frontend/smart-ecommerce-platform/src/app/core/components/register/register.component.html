@@ -1,1 +1,10 @@
-<p>register works!</p>
+<smart-ecommerce-platform-loader *ngIf="isLoading"></smart-ecommerce-platform-loader>
+<div class="register-container">
+  <h2>Register</h2>
+  <form [formGroup]="registerForm">
+  <input formControlName="username" type="text" placeholder="Username" required>
+  <input formControlName="password" type="password" placeholder="Password" required>
+  <input formControlName="email" type="email" placeholder="Email address" required>
+</form>
+  <button [disabled]="registerForm.invalid" (click)="registerUser()">Register</button>
+</div>

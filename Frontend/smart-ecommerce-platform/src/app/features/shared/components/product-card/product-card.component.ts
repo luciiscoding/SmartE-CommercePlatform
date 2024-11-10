@@ -6,6 +6,7 @@ import {
   Product,
 } from '@app/features';
 import { ProductService } from '@app/features/services';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'smart-ecommerce-platform-product-card',
@@ -19,12 +20,19 @@ export class ProductCardComponent {
 
   constructor(
     private _dialog: MatDialog,
-    private _productService: ProductService
+    private _productService: ProductService,
+    private _toastrService: ToastrService
   ) {}
 
   openDeleteDialog(): void {
-    this._productService.deleteProduct(this.product.id!).subscribe(() => {
-      this.productUpdated.emit();
+    this._productService.deleteProduct(this.product.id!).subscribe({
+      next: () => {
+        this.productUpdated.emit();
+        this._toastrService.success('Product deleted successfully');
+      },
+      error: () => {
+        this._toastrService.error('Error occurred while deleting product');
+      },
     });
   }
 
@@ -38,8 +46,16 @@ export class ProductCardComponent {
       .subscribe((updatedProduct: Product) => {
         if (updatedProduct) {
           updatedProduct.id = this.product.id;
-          this._productService.updateProduct(updatedProduct).subscribe(() => {
-            this.productUpdated.emit();
+          this._productService.updateProduct(updatedProduct).subscribe({
+            next: () => {
+              this.productUpdated.emit();
+              this._toastrService.success('Product updated successfully');
+            },
+            error: () => {
+              this._toastrService.error(
+                'Error occurred while updating product'
+              );
+            },
           });
         }
       });

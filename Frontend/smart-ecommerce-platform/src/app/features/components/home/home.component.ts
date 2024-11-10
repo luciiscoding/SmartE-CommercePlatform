@@ -6,6 +6,7 @@ import {
   Product,
 } from '@app/features';
 import { ProductService } from '@app/features/services';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'smart-ecommerce-platform-home',
@@ -15,7 +16,8 @@ import { ProductService } from '@app/features/services';
 export class HomeComponent {
   constructor(
     private _productService: ProductService,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _toastrService: ToastrService
   ) {}
 
   products: Product[] = [];
@@ -37,8 +39,14 @@ export class HomeComponent {
       .afterClosed()
       .subscribe((data) => {
         if (data) {
-          this._productService.createProduct(data).subscribe(() => {
-            this.getProducts();
+          this._productService.createProduct(data).subscribe({
+            next: () => {
+              this.getProducts();
+              this._toastrService.success('Product added successfully');
+            },
+            error: () => {
+              this._toastrService.error('Error occurred while adding product');
+            },
           });
         }
       });

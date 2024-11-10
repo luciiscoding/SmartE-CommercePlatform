@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FeaturesModule } from './features';
 import { CoreModule } from './core';
 import { SharedModule } from './shared';
+import { ToastrModule } from 'ngx-toastr';
 
 const SMART_E_COMMERCE_PLATORM_MODULES: any[] = [
   LayoutModule,
@@ -20,6 +21,11 @@ const SMART_E_COMMERCE_PLATORM_MODULES: any[] = [
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
