@@ -2,13 +2,13 @@
 {
     public class LoginUserDTO
     {
-        public string Username { get; set; }
+        public string Email { get; set; }
 
         public string Password { get; set; }
 
-        public LoginUserDTO(string username, string password)
+        public LoginUserDTO(string email, string password)
         {
-            Username = username;
+            Email = email;
             Password = password;
         }
 

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Application.UseCases.User.Queries.LoginUser
 {
-    public class LoginUserQuery : IRequest<Guid>
+    public class LoginUserQuery : IRequest<UserDTO>
     {
         public LoginUserDTO User { get; set; }
 

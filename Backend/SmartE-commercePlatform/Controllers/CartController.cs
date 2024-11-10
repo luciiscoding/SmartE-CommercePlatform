@@ -3,10 +3,13 @@ using Application.UseCases.Cart.Commands.AddToCart;
 using Application.UseCases.Cart.Commands.RemoveFromCart;
 using Application.UseCases.Cart.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SmartE_commercePlatform.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/v1/cart")]
     [ApiController]
     public class CartController : ControllerBase

@@ -2,7 +2,7 @@
 <div class="login-container">
   <h2>Login</h2>
   <form [formGroup]="loginForm">
-  <input formControlName="username" type="text" placeholder="Username" required>
+  <input formControlName="email" type="text" placeholder="Email address" required>
   <input formControlName="password" type="password" placeholder="Password" required>
 </form>
   <button [disabled]="loginForm.invalid" (click)="loginUser()">Login</button>

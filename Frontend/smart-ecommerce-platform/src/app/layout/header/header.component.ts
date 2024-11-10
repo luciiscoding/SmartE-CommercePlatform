@@ -13,18 +13,15 @@ export class HeaderComponent {
 
   constructor(userService: UserService, private _router: Router) {
     userService.onUserLogin$.pipe(filter((val) => val)).subscribe(() => {
-      console.log('User logged in');
-      userService
-        .getUserById(sessionStorage.getItem('userId')!)
-        .subscribe((user) => {
-          this.username = user.username;
-        });
+      userService.getUserDetails().subscribe((user) => {
+        this.username = user.username!;
+      });
     });
   }
 
   onLogoutClick(): void {
     this.username = '';
-    sessionStorage.clear();
+    localStorage.clear();
     this._router.navigate(['/login']);
   }
 }

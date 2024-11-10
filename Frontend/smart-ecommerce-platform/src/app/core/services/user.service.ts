@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '@app/shared';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -21,26 +21,47 @@ export class UserService {
 
   constructor(private _httpClient: HttpClient) {}
 
-  loginUser(user: User): Observable<string> {
-    return this._httpClient.post<string>(
-      `${this._baseUrl}/login`,
-      user,
-      this.options
-    );
+  loginUser(user: User): Observable<void> {
+    return this._httpClient
+      .post<HttpResponse<object>>(`${this._baseUrl}/login`, user, {
+        ...this.options,
+        observe: 'response',
+      })
+      .pipe(
+        map((response: HttpResponse<object>) => this.setUpJwtToken(response))
+      );
   }
 
-  registerUser(user: User): Observable<string> {
-    return this._httpClient.post<string>(
+  registerUser(user: User): Observable<void> {
+    return this._httpClient.post<void>(
       `${this._baseUrl}/register`,
       user,
       this.options
     );
   }
 
-  getUserById(userId: string): Observable<User> {
-    return this._httpClient.get<User>(
-      `${this._baseUrl}/${userId}`,
-      this.options
-    );
+  getUserDetails(): Observable<User> {
+    return this._httpClient.get<User>(`${this._baseUrl}/details`, this.options);
+  }
+
+  private setUpJwtToken(response: HttpResponse<object>): void {
+    const token: string = this.getToken(response);
+    const userData: User = this.parseJwt(token);
+    localStorage.clear();
+    localStorage.setItem('token', token);
+    localStorage.setItem('userId', userData.id!.toString());
+  }
+
+  private getToken(response: HttpResponse<object>): string {
+    const authorizationHeader: string | null =
+      response.headers.get('Authorization');
+    return authorizationHeader
+      ? authorizationHeader.replace('Bearer ', '')
+      : '';
+  }
+
+  private parseJwt(token: string): User {
+    const payloadBase64: string = token.split('.')[1];
+    return JSON.parse(atob(payloadBase64));
   }
 }

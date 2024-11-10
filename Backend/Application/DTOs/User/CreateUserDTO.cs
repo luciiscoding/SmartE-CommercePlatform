@@ -2,11 +2,11 @@
 {
     public class CreateUserDTO : LoginUserDTO
     {
-        public string Email { get; set; }
+        public string Username { get; set; }
 
         public CreateUserDTO(string username, string password, string email) : base(username, password)
         {
-            Email = email;
+            Username = username;
         }
 
         public CreateUserDTO()

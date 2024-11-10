@@ -12,7 +12,7 @@ import { finalize } from 'rxjs';
 })
 export class LoginComponent {
   loginForm: FormGroup = new FormGroup({
-    username: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(10),
@@ -30,13 +30,12 @@ export class LoginComponent {
     this.isLoading = true;
     this._userService
       .loginUser({
-        username: this.loginForm.value.username,
+        email: this.loginForm.value.email,
         password: this.loginForm.value.password,
       })
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
-        next: (userId: string) => {
-          sessionStorage.setItem('userId', userId.toString());
+        next: () => {
           this._router.navigate(['/home']);
           this._userService.onUserLogin$.next(true);
           this._toastrService.success('Login successful');

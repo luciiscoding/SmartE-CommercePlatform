@@ -5,10 +5,13 @@ using Application.UseCases.Product.Commands.UpdateProduct;
 using Application.UseCases.Product.Queries.GetAllProducts;
 using Application.UseCases.Product.Queries.GetProductById;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Product.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/v1/product")]
     [ApiController]
     public class ProductController : ControllerBase

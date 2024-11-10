@@ -8,6 +8,6 @@ namespace Domain.Repositories
         Task<User> GetUserById(Guid id);
         Task UpdateUser(User user);
         Task DeleteUser(Guid id);
-        Task<Guid> LoginUser(User user);
+        Task<User> LoginUser(User user);
     }
 }
