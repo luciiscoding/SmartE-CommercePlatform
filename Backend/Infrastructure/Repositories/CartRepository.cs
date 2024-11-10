@@ -14,11 +14,11 @@ namespace Infrastructure.Repositories
             this.context = context;
         }
 
-        public async Task AddToCart(Guid id, Guid productId)
+        public async Task AddToCart(Guid userId, Guid productId)
         {
             var cart = await context.Carts
              .Include(c => c.Products)
-             .FirstOrDefaultAsync(c => c.Id == id);
+             .FirstOrDefaultAsync(c => c.UserId == userId);
 
             if (cart == null)
             {
@@ -36,11 +36,11 @@ namespace Infrastructure.Repositories
             await context.SaveChangesAsync();
         }
 
-        public async Task RemoveFromCart(Guid id, Guid productId)
+        public async Task RemoveFromCart(Guid userId, Guid productId)
         {
             var cart = await context.Carts
-                .Include(c => c.Products)
-                .FirstOrDefaultAsync(c => c.Id == id);
+             .Include(c => c.Products)
+             .FirstOrDefaultAsync(c => c.UserId == userId);
 
             if (cart == null)
             {

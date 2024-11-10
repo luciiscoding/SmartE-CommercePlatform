@@ -4,6 +4,21 @@
   </h1>
   <div *ngIf="username !== ''" class="user-area">
   <h4>Hello, {{username}}!</h4>
+  <mat-icon matTooltip="Shopping cart" (click)="toggleCart()">shopping_cart</mat-icon>
   <mat-icon matTooltip="Logout" (click)="onLogoutClick()">logout</mat-icon>
+
+  <div *ngIf="isCartOpen" class="shopping-cart-dropdown" (click)="$event.stopPropagation()">
+    <h4>Items in Cart:</h4>
+    <ul *ngIf="cartItems.length; else noItems">
+      <li *ngFor="let item of cartItems; let i = index">
+        {{ item.name }} - {{ item.price | currency }}
+        <button matTooltip="Remove item"class="remove-item-btn" (click)="removeItem(i)">X</button>
+      </li>
+    </ul>
+    <ng-template #noItems>
+      <p>No items in cart</p>
+    </ng-template>
+    <button class="checkout">Checkout</button>
+  </div>
 </div>
 </div>

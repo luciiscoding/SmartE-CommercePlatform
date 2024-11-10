@@ -14,7 +14,7 @@ namespace Application.UseCases.Cart.Commands.RemoveFromCart
 
         public async Task Handle(RemoveFromCartCommand request, CancellationToken cancellationToken)
         {
-            await cartRepository.RemoveFromCart(request.CartId, request.ProductId);
+            await cartRepository.RemoveFromCart(request.UserId, request.ProductId);
         }
     }
 }

@@ -16,7 +16,6 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductCardComponent {
   @Input() product!: Product;
   @Output() productUpdated: EventEmitter<void> = new EventEmitter<void>();
-  currency: string = 'EUR';
 
   constructor(
     private _dialog: MatDialog,

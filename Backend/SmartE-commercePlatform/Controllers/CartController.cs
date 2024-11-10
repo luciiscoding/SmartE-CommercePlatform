@@ -28,17 +28,21 @@ namespace SmartE_commercePlatform.Controllers
         }
 
 
-        [HttpPut("{id}/product/{productId}/add")]
+        [HttpPut("add/{productId}")]
         public async Task<ActionResult> AddToCart(Guid id, Guid productId)
         {
-            await mediator.Send(new AddToCartCommand(id, productId));
+            Guid userId = new Guid(User.Claims.FirstOrDefault(c => c.Type == "id")?.Value!);
+
+            await mediator.Send(new AddToCartCommand(userId, productId));
             return NoContent();
         }
 
-        [HttpPut("{id}/product/{productId}/remove")]
+        [HttpPut("remove/{productId}")]
         public async Task<ActionResult> RemoveFromCart(Guid id, Guid productId)
         {
-            await mediator.Send(new RemoveFromCartCommand(id, productId));
+            Guid userId = new Guid(User.Claims.FirstOrDefault(c => c.Type == "id")?.Value!);
+
+            await mediator.Send(new RemoveFromCartCommand(userId, productId));
             return NoContent();
         }
     }

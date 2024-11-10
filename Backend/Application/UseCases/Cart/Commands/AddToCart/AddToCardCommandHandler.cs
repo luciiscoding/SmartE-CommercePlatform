@@ -15,7 +15,7 @@ namespace Application.UseCases.Cart.Commands.AddToCart
 
         public async Task Handle(AddToCartCommand request, CancellationToken cancellationToken)
         {
-            await cartRepository.AddToCart(request.CartId, request.ProductId);
+            await cartRepository.AddToCart(request.UserId, request.ProductId);
         }
     }
 }
