@@ -1,0 +1,12 @@
+﻿D:\INET Labs\SmartE-commercePlatform\Backend\Infrastructure\DependecyInjection.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\Infrastructure\Migrations\20241102115757_InitialMigration.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\Infrastructure\Migrations\20241102115757_InitialMigration.Designer.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\Infrastructure\Migrations\20241109112336_AddUserEntity.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\Infrastructure\Migrations\20241109112336_AddUserEntity.Designer.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\Infrastructure\Migrations\20241109124425_AddCartAndRelationsWithOtherTables.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\Infrastructure\Migrations\20241109124425_AddCartAndRelationsWithOtherTables.Designer.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\Infrastructure\Migrations\ApplicationDbContextModelSnapshot.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\Infrastructure\Persistence\ApplicationDbContext.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\Infrastructure\Repositories\CartRepository.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\Infrastructure\Repositories\ProductRepository.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\Infrastructure\Repositories\UserRepository.cs

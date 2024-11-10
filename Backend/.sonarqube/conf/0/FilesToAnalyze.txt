@@ -1,0 +1,6 @@
+﻿D:\INET Labs\SmartE-commercePlatform\Backend\Domain\Entities\Cart.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\Domain\Entities\Product.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\Domain\Entities\User.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\Domain\Repositories\ICartRepository.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\Domain\Repositories\IProductRepository.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\Domain\Repositories\IUserRepository.cs

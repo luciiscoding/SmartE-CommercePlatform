@@ -1,0 +1,11 @@
+﻿D:\INET Labs\SmartE-commercePlatform\Backend\SmartE-commercePlatform\Controllers\CartController.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\SmartE-commercePlatform\Controllers\ProductController.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\SmartE-commercePlatform\Controllers\UserController.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\SmartE-commercePlatform\Program.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\SmartE-commercePlatform\obj\Debug\net8.0\SmartE-commercePlatform.GlobalUsings.g.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\SmartE-commercePlatform\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\SmartE-commercePlatform\obj\Debug\net8.0\SmartE-commercePlatform.AssemblyInfo.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\SmartE-commercePlatform\obj\Debug\net8.0\SmartE-commercePlatform.MvcApplicationPartsAssemblyInfo.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\SmartE-commercePlatform\appsettings.Development.json
+D:\INET Labs\SmartE-commercePlatform\Backend\SmartE-commercePlatform\appsettings.json
+D:\INET Labs\SmartE-commercePlatform\Backend\SmartE-commercePlatform\Properties\launchSettings.json

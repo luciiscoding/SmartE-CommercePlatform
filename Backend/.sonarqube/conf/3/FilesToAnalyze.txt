@@ -1,0 +1,4 @@
+﻿D:\INET Labs\SmartE-commercePlatform\Backend\UnitTests\Commands\CreateProductCommandTests.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\UnitTests\Commands\DeleteProductCommandTests.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\UnitTests\Commands\UpdateProductCommandTests.cs
+D:\INET Labs\SmartE-commercePlatform\Backend\UnitTests\Queries\GetAllProductsQueryTests.cs
