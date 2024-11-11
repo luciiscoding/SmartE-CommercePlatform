@@ -4,7 +4,7 @@
   align-items: center;
   height: calc(100% - 64px);
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: cursive;
   background-color: #f4f4f9;
 
   .login-container {
@@ -40,6 +40,7 @@
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+    transition: background 0.3s;
   }
 
   .login-container button:hover {

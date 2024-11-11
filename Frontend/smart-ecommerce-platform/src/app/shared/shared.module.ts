@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { LoaderComponent } from './components';
+import { GenericWarningModalComponent, LoaderComponent } from './components';
 import { AuthorizationInterceptor } from './utils';
 
 @NgModule({
-  declarations: [LoaderComponent],
+  declarations: [LoaderComponent, GenericWarningModalComponent],
   exports: [LoaderComponent],
   imports: [BrowserModule, HttpClientModule, MatProgressSpinnerModule],
   providers: [

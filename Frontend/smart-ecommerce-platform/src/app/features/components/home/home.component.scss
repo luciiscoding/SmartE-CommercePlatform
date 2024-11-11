@@ -9,6 +9,7 @@
     background-color: aquamarine;
 
     .add-product-btn {
+      width: 15%;
       margin-top: 20px;
       padding: 10px;
       background-color: #4caf50;
@@ -16,6 +17,9 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      transition: background 0.3s;
+      font-family: cursive;
+      font-size: 20px;
 
       &:hover {
         background-color: #45a049;

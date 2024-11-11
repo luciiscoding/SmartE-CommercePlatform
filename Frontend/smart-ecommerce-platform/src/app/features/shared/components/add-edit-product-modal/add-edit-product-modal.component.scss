@@ -36,6 +36,7 @@
     top: 50%;
     transform: translateY(-100%);
     transition: color 0.3s;
+    font-family: cursive;
 
     &:hover {
       color: #ff0000;
@@ -104,6 +105,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-family: cursive;
   }
 
   .proceed-btn {
@@ -113,6 +115,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-family: cursive;
 
     &:disabled {
       background-color: #c0c0c0;
