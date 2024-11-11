@@ -18,7 +18,7 @@ namespace Application.UseCases.Cart.Queries
 
         public async Task<CartDTO> Handle(GetCartByIdQuery request, CancellationToken cancellationToken)
         {
-            var cart = await cartRepository.GetCartById(request.Id);
+            var cart = await cartRepository.GetCartById(request.UserId);
             return mapper.Map<CartDTO>(cart);
         }
     }

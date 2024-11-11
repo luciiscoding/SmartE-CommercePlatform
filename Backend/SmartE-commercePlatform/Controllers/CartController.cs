@@ -21,15 +21,17 @@ namespace SmartE_commercePlatform.Controllers
             this.mediator = mediator;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<CartDTO>> GetCartById(Guid id)
+        [HttpGet]
+        public async Task<ActionResult<CartDTO>> GetCartById()
         {
-            return await mediator.Send(new GetCartByIdQuery(id));
+            Guid userId = new Guid(User.Claims.FirstOrDefault(c => c.Type == "id")?.Value!);
+
+            return await mediator.Send(new GetCartByIdQuery(userId));
         }
 
 
         [HttpPut("add/{productId}")]
-        public async Task<ActionResult> AddToCart(Guid id, Guid productId)
+        public async Task<ActionResult> AddToCart(Guid productId)
         {
             Guid userId = new Guid(User.Claims.FirstOrDefault(c => c.Type == "id")?.Value!);
 
@@ -38,7 +40,7 @@ namespace SmartE_commercePlatform.Controllers
         }
 
         [HttpPut("remove/{productId}")]
-        public async Task<ActionResult> RemoveFromCart(Guid id, Guid productId)
+        public async Task<ActionResult> RemoveFromCart(Guid productId)
         {
             Guid userId = new Guid(User.Claims.FirstOrDefault(c => c.Type == "id")?.Value!);
 

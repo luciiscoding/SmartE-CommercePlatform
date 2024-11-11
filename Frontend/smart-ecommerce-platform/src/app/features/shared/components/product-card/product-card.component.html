@@ -9,4 +9,8 @@
   <p>{{ product.description }}</p>
   <p>Price: {{ product.price | currency }}</p>
   <p>Review: {{ product.review }} / 5</p>
+  <button class="add-to-cart-btn" (click)="addToCart(product.id!)">
+    <mat-icon>add_shopping_cart</mat-icon> Add to Cart
+  </button>
+  
 </div>

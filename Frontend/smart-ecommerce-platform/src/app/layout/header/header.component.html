@@ -9,9 +9,9 @@
 
   <div *ngIf="isCartOpen" class="shopping-cart-dropdown" (click)="$event.stopPropagation()">
     <h4>Items in Cart:</h4>
-    <ul *ngIf="cartItems.length; else noItems">
-      <li *ngFor="let item of cartItems; let i = index">
-        {{ item.name }} - {{ item.price | currency }}
+    <ul *ngIf="cartItems?.length; else noItems">
+      <li *ngFor="let product of cartItems; let i = index">
+        {{ product.name }} - {{ product.price | currency }}
         <button matTooltip="Remove item"class="remove-item-btn" (click)="removeItem(i)">X</button>
       </li>
     </ul>

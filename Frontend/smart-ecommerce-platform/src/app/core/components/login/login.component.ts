@@ -37,7 +37,7 @@ export class LoginComponent {
       .subscribe({
         next: () => {
           this._router.navigate(['/home']);
-          this._userService.onUserLogin$.next(true);
+          this._userService.userLoggedIn$.next(true);
           this._toastrService.success('Login successful');
         },
         error: () => {

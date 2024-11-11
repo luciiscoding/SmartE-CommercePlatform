@@ -5,7 +5,7 @@ import {
   AddEditProductModalComponent,
   Product,
 } from '@app/features';
-import { ProductService } from '@app/features/services';
+import { CartService, ProductService } from '@app/features/services';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -20,7 +20,8 @@ export class ProductCardComponent {
   constructor(
     private _dialog: MatDialog,
     private _productService: ProductService,
-    private _toastrService: ToastrService
+    private _toastrService: ToastrService,
+    private _cartService: CartService
   ) {}
 
   openDeleteDialog(): void {
@@ -58,5 +59,15 @@ export class ProductCardComponent {
           });
         }
       });
+  }
+
+  addToCart(productId: string): void {
+    this._cartService.addToCart(productId).subscribe({
+      next: () => {
+        this._toastrService.success('Product added to cart');
+        this._cartService.cartUpdated$.next();
+      },
+      error: () => {},
+    });
   }
 }

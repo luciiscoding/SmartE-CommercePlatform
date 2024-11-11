@@ -13,7 +13,6 @@ export class AuthorizationInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    console.log(localStorage.getItem('token'));
     const request: HttpRequest<unknown> = req.clone({
       headers: req.headers.append(
         'Authorization',

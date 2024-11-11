@@ -59,16 +59,18 @@ namespace Infrastructure.Repositories
             await context.SaveChangesAsync();
         }
 
-        public Task<Cart> GetCartById(Guid id)
+        public async Task<Cart> GetCartById(Guid userId)
         {
-            var cart = context.Carts.Include(c => c.Products).FirstOrDefault(c => c.Id == id);
+            var cart = await context.Carts
+             .Include(c => c.Products)
+             .FirstOrDefaultAsync(c => c.UserId == userId);
 
             if (cart == null)
             {
                 throw new ResourceNotFoundException(ExceptionsResource.NoResourceFound);
             }
 
-            return Task.FromResult(cart);
+            return cart;
         }
     }
 }

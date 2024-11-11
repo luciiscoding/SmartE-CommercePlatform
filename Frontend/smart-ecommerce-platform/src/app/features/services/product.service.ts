@@ -31,14 +31,14 @@ export class ProductService {
     return this._httpClient.put(this._baseUrl, product, this.options);
   }
 
-  deleteProduct(id: number) {
+  deleteProduct(id: string) {
     return this._httpClient.delete<void>(
       `${this._baseUrl}/${id}`,
       this.options
     );
   }
 
-  getProductById(id: number) {
+  getProductById(id: string) {
     return this._httpClient.get<Product>(
       `${this._baseUrl}/${id}`,
       this.options

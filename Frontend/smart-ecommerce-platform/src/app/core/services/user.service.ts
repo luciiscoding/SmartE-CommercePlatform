@@ -15,7 +15,7 @@ export class UserService {
     }),
   };
 
-  onUserLogin$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  userLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private _baseUrl: string = 'https://localhost:7078/api/v1/user';
 
