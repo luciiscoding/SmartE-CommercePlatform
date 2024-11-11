@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Repositories;
+using Infrastructure.Exceptions;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
@@ -23,7 +24,7 @@ namespace Infrastructure.Repositories
 
             if (existingUser != null)
             {
-                throw new Exception("User already exists");
+                throw new ConflictException(ExceptionsResource.Conflict);
             }
 
             await context.Users.AddAsync(user);
@@ -34,10 +35,10 @@ namespace Infrastructure.Repositories
 
         public async Task<User> LoginUser(User user)
         {
-            var userResult = context.Users.FirstOrDefault(u => u.Email == user.Email);
+            var userResult = await context.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
             if (userResult == null || !VerifyPassword(user.Password, userResult.Password))
             {
-                throw new Exception("User not found");
+                throw new ResourceNotFoundException(ExceptionsResource.NoResourceFound);
             }
             return userResult;
         }
@@ -47,7 +48,7 @@ namespace Infrastructure.Repositories
             var user = context.Users.Find(id);
             if (user == null)
             {
-                throw new Exception("User not found");
+                throw new ResourceNotFoundException(ExceptionsResource.NoResourceFound);
             }
             context.Users.Remove(user);
             await context.SaveChangesAsync();
@@ -58,7 +59,7 @@ namespace Infrastructure.Repositories
             var user = context.Users.Find(id);
             if (user == null)
             {
-                throw new Exception("User not found");
+                throw new ResourceNotFoundException(ExceptionsResource.NoResourceFound);
             }
             return Task.FromResult(user);
         }

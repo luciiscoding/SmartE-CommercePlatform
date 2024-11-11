@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Repositories;
+using Infrastructure.Exceptions;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,7 +27,7 @@ namespace Infrastructure.Repositories
             var product = context.Products.Find(id);
             if (product == null)
             {
-                throw new Exception("Product not found");
+                throw new ResourceNotFoundException(ExceptionsResource.NoResourceFound);
             }
             context.Products.Remove(product);
             await context.SaveChangesAsync();
@@ -42,7 +43,7 @@ namespace Infrastructure.Repositories
             var product = context.Products.Find(id);
             if (product == null)
             {
-                throw new Exception("Product not found");
+                throw new ResourceNotFoundException(ExceptionsResource.NoResourceFound);
             }
             return Task.FromResult(product);
         }

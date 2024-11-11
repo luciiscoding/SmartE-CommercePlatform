@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Repositories;
+using Infrastructure.Exceptions;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,14 +23,14 @@ namespace Infrastructure.Repositories
 
             if (cart == null)
             {
-                throw new Exception("Cart not found");
+                throw new ResourceNotFoundException("Cart." + ExceptionsResource.NoResourceFound);
             }
 
             var product = await context.Products.FirstOrDefaultAsync(p => p.Id == productId);
 
             if (product == null)
             {
-                throw new Exception("Product not found");
+                throw new ResourceNotFoundException("Product." + ExceptionsResource.NoResourceFound);
             }
 
             cart.Products.Add(product);
@@ -44,14 +45,14 @@ namespace Infrastructure.Repositories
 
             if (cart == null)
             {
-                throw new Exception("Cart not found");
+                throw new ResourceNotFoundException("Cart." + ExceptionsResource.NoResourceFound);
             }
 
             var product = await context.Products.FirstOrDefaultAsync(p => p.Id == productId);
 
             if (product == null)
             {
-                throw new Exception("Product not found");
+                throw new ResourceNotFoundException("Product." + ExceptionsResource.NoResourceFound);
             }
 
             cart.Products.Remove(product);
@@ -64,7 +65,7 @@ namespace Infrastructure.Repositories
 
             if (cart == null)
             {
-                throw new Exception("Cart not found");
+                throw new ResourceNotFoundException(ExceptionsResource.NoResourceFound);
             }
 
             return Task.FromResult(cart);
