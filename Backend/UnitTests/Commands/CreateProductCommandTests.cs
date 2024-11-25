@@ -1,5 +1,4 @@
-﻿using Application.DTOs;
-using Application.DTOs.Product;
+﻿using Application.DTOs.Product;
 using Application.UseCases.Product.Commands.CreateProduct;
 using AutoMapper;
 using Domain.Repositories;
@@ -16,7 +15,7 @@ namespace UnitTests.Commands
         public CreateProductCommandTests()
         {
             repository = Substitute.For<IProductRepository>();
-            mapper = Substitute.For<IMapper>();asdasd
+            mapper = Substitute.For<IMapper>();
         }
 
 
