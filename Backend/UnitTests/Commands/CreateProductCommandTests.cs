@@ -16,7 +16,7 @@ namespace UnitTests.Commands
         public CreateProductCommandTests()
         {
             repository = Substitute.For<IProductRepository>();
-            mapper = Substitute.For<IMapper>();
+            mapper = Substitute.For<IMapper>();asdasd
         }
 
 
