@@ -17,6 +17,7 @@ namespace UnitTests.Commands
         {
             repository = Substitute.For<IProductRepository>();
             mapper = Substitute.For<IMapper>();
+            asda
         }
 
 
