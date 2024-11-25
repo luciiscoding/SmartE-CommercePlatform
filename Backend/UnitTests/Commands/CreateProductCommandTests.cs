@@ -13,7 +13,11 @@ namespace UnitTests.Commands
         private readonly IProductRepository repository;
         private readonly IMapper mapper;
 
-  
+        public CreateProductCommandTests()
+        {
+            repository = Substitute.For<IProductRepository>();
+            mapper = Substitute.For<IMapper>();
+        }
 
 
         [Fact]
