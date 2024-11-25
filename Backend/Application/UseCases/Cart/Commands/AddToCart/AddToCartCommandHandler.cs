@@ -4,11 +4,11 @@ using MediatR;
 
 namespace Application.UseCases.Cart.Commands.AddToCart
 {
-    public class AddToCardCommandHandler : IRequestHandler<AddToCartCommand>
+    public class AddToCartCommandHandler : IRequestHandler<AddToCartCommand>
     {
         private readonly ICartRepository cartRepository;
 
-        public AddToCardCommandHandler(ICartRepository cartRepository)
+        public AddToCartCommandHandler(ICartRepository cartRepository)
         {
             this.cartRepository = cartRepository;
         }
