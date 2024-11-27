@@ -3,11 +3,11 @@ using MediatR;
 
 namespace Application.UseCases.User.Commands.DeleteUser
 {
-    public class DeleteUserComandHandler : IRequestHandler<DeleteUserCommand>
+    public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
     {
         private readonly IUserRepository userRepository;
 
-        public DeleteUserComandHandler(IUserRepository userRepository)
+        public DeleteUserCommandHandler(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
         }
