@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Product.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+   // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/v1/product")]
     [ApiController]
     public class ProductController : ControllerBase
