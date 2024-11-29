@@ -18,7 +18,7 @@ namespace Application.UseCases.Product.Queries.GetAllProducts
 
         public async Task<IEnumerable<ProductDTO>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
-            var products = await productRepository.GetAllProducts();
+            var products = await productRepository.GetFilteredProducts(request.Type, request.MinPrice, request.MaxPrice, request.MinReview);
             return mapper.Map<IEnumerable<ProductDTO>>(products);
         }
     }

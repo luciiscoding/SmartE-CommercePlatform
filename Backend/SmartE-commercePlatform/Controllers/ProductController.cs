@@ -5,13 +5,11 @@ using Application.UseCases.Product.Commands.UpdateProduct;
 using Application.UseCases.Product.Queries.GetAllProducts;
 using Application.UseCases.Product.Queries.GetProductById;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Product.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/v1/product")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -44,9 +42,14 @@ namespace Product.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAllProducts()
+        public async Task<ActionResult> GetAllProducts(
+        [FromQuery] string? type,
+        [FromQuery] decimal? minPrice,
+        [FromQuery] decimal? maxPrice,
+        [FromQuery] int? minReview)
         {
-            var products = await mediator.Send(new GetAllProductsQuery());
+            var query = new GetAllProductsQuery(type, minPrice, maxPrice, minReview);
+            var products = await mediator.Send(query);
             return Ok(products);
         }
 
