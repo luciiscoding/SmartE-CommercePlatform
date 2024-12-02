@@ -5,11 +5,13 @@ using Application.UseCases.Product.Commands.UpdateProduct;
 using Application.UseCases.Product.Queries.GetAllProducts;
 using Application.UseCases.Product.Queries.GetProductById;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Product.Controllers
 {
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/v1/product")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -43,15 +45,18 @@ namespace Product.Controllers
 
         [HttpGet]
         public async Task<ActionResult> GetAllProducts(
-        [FromQuery] string? type,
-        [FromQuery] decimal? minPrice,
-        [FromQuery] decimal? maxPrice,
-        [FromQuery] int? minReview)
+         [FromQuery] string? type,
+         [FromQuery] decimal? minPrice,
+         [FromQuery] decimal? maxPrice,
+         [FromQuery] int? minReview,
+         [FromQuery] int pageNumber = 1,
+         [FromQuery] int pageSize = 10)
         {
-            var query = new GetAllProductsQuery(type, minPrice, maxPrice, minReview);
-            var products = await mediator.Send(query);
-            return Ok(products);
+            var query = new GetAllProductsQuery(type, minPrice, maxPrice, minReview, pageNumber, pageSize);
+            var response = await mediator.Send(query);
+            return Ok(response);
         }
+
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteProduct(Guid id)
