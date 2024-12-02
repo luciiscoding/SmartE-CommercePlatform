@@ -72,7 +72,7 @@ namespace UnitTests.Queries
                 "Type",
                 "Test Product",
                 "Description of product",
-                99.99,
+                99.99m,
                 4);
         }
     }

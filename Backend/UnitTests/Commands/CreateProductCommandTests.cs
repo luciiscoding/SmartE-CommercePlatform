@@ -23,7 +23,7 @@ namespace UnitTests.Commands
         public async void CreateProductCommand_ValidCommand_ShouldPass()
         {
             var product = new CreateProductDTO
-            ("Type", "Product 1", "Description", 10.22, 3);
+            ("Type", "Product 1", "Description", 10.22m, 3);
 
 
             // Arrange

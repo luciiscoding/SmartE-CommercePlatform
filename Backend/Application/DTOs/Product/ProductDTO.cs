@@ -8,7 +8,7 @@
         {
         }
 
-        public ProductDTO(Guid id, string type, string name, string description, double price, int review) : base(type, name, description, price, review)
+        public ProductDTO(Guid id, string type, string name, string description, decimal price, int review) : base(type, name, description, price, review)
         {
             Id = id;
         }

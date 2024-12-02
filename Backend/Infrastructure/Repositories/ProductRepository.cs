@@ -38,6 +38,26 @@ namespace Infrastructure.Repositories
             return await context.Products.ToListAsync();
         }
 
+        public async Task<IEnumerable<Product>> GetFilteredProducts(string? type, decimal? minPrice, decimal? maxPrice, int? minReview)
+        {
+            var query = context.Products.AsQueryable();
+
+            if (!string.IsNullOrEmpty(type))
+                query = query.Where(p => p.Type == type);
+
+            if (minPrice.HasValue)
+                query = query.Where(p => p.Price >= minPrice.Value);
+
+            if (maxPrice.HasValue)
+                query = query.Where(p => p.Price <= maxPrice.Value);
+
+            if (minReview.HasValue)
+                query = query.Where(p => p.Review >= minReview);
+
+
+            return await query.ToListAsync();
+        }
+
         public Task<Product> GetProductById(Guid id)
         {
             var product = context.Products.Find(id);
@@ -53,5 +73,6 @@ namespace Infrastructure.Repositories
             context.Products.Update(product);
             await context.SaveChangesAsync();
         }
+
     }
 }

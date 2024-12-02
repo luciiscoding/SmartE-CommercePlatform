@@ -10,7 +10,7 @@
 
         public string Description { get; set; }
 
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         public int Review { get; set; }
 
@@ -20,7 +20,7 @@
         {
         }
 
-        public Product(Guid id, string type, string name, string description, double price, int review)
+        public Product(Guid id, string type, string name, string description, decimal price, int review)
         {
             Id = id;
             Type = type;
