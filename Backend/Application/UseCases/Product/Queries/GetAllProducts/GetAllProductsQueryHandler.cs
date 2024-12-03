@@ -34,7 +34,7 @@ namespace Application.UseCases.Product.Queries.GetAllProducts
 
             int totalItems = products.Count();
 
-            int skip = (request.PageNumber - 1) * request.PageSize;
+            int skip = (request.PageNumber ) * request.PageSize;
             products = products.Skip(skip).Take(request.PageSize);
 
             var productDTOs = mapper.Map<IEnumerable<ProductDTO>>(products);
