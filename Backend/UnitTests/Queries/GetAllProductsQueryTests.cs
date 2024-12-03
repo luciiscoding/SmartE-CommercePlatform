@@ -36,19 +36,19 @@ namespace UnitTests.Queries
 
             // Assert
             result.Should().NotBeNull();
-            result.Should().HaveCount(products.Count);
-            result.First().Id.Should().Be(products.First().Id);
-            result.First().Name.Should().Be(products.First().Name);
-            result.First().Type.Should().Be(products.First().Type);
-            result.First().Description.Should().Be(products.First().Description);
-            result.First().Price.Should().Be(products.First().Price);
-            result.First().Review.Should().Be(products.First().Review);
-            result.Last().Id.Should().Be(products.Last().Id);
-            result.Last().Name.Should().Be(products.Last().Name);
-            result.Last().Type.Should().Be(products.Last().Type);
-            result.Last().Description.Should().Be(products.Last().Description);
-            result.Last().Price.Should().Be(products.Last().Price);
-            result.Last().Review.Should().Be(products.Last().Review);
+            result.Data.Should().HaveCount(products.Count);
+            result.Data.First().Id.Should().Be(products.First().Id);
+            result.Data.First().Name.Should().Be(products.First().Name);
+            result.Data.First().Type.Should().Be(products.First().Type);
+            result.Data.First().Description.Should().Be(products.First().Description);
+            result.Data.First().Price.Should().Be(products.First().Price);
+            result.Data.First().Review.Should().Be(products.First().Review);
+            result.Data.Last().Id.Should().Be(products.Last().Id);
+            result.Data.Last().Name.Should().Be(products.Last().Name);
+            result.Data.Last().Type.Should().Be(products.Last().Type);
+            result.Data.Last().Description.Should().Be(products.Last().Description);
+            result.Data.Last().Price.Should().Be(products.Last().Price);
+            result.Data.Last().Review.Should().Be(products.Last().Review);
 
             mapper.Received(1).Map<IEnumerable<ProductDTO>>(products);
         }
@@ -69,7 +69,7 @@ namespace UnitTests.Queries
 
             // Assert
             result.Should().NotBeNull();
-            result.Should().BeEmpty();
+            result.Data.Should().BeEmpty();
 
             mapper.Received(1).Map<IEnumerable<ProductDTO>>(products);
         }
@@ -112,8 +112,8 @@ namespace UnitTests.Queries
 
             // Assert
             result.Should().NotBeNull();
-            result.Should().HaveCount(filteredProducts.Count);
-            foreach (var dto in result)
+            result.Data.Should().HaveCount(products.Count); ;
+            foreach (var dto in result.Data)
             {
                 var product = filteredProducts.FirstOrDefault(p => p.Id == dto.Id);
                 product.Should().NotBeNull();

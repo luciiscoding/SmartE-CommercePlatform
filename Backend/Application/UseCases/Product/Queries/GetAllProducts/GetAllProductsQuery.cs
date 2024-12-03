@@ -9,7 +9,7 @@ namespace Application.UseCases.Product.Queries.GetAllProducts
         public decimal? MinPrice { get; set; }
         public decimal? MaxPrice { get; set; }
         public int? MinReview { get; set; }
-        public int PageNumber { get; set; } = 1; 
+        public int PageNumber { get; set; } = 0; 
         public int PageSize { get; set; } = 10; 
 
         public GetAllProductsQuery(
