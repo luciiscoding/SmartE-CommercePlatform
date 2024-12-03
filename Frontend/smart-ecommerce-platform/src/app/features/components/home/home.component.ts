@@ -1,5 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import {
@@ -26,6 +31,7 @@ export class HomeComponent implements OnDestroy {
   totalCount: number = 0;
   products: Product[] = [];
   paginatedProducts: Product[] = [];
+  selectedRating: number = -1;
 
   private _subs$: Subscription = new Subscription();
 
@@ -45,7 +51,8 @@ export class HomeComponent implements OnDestroy {
   }
 
   onProductUpdated(): void {
-    this.getProducts(this.pageNumber, this.pageSize);
+    this.pageNumber = 0;
+    this.getProducts();
   }
 
   openAddProductModal(): void {
@@ -71,7 +78,7 @@ export class HomeComponent implements OnDestroy {
         )
         .subscribe({
           next: () => {
-            this.getProducts(this.pageNumber, this.pageSize);
+            this.getProducts();
             this._toastrService.success('Product added successfully');
           },
           error: (error: HttpErrorResponse) => {
@@ -82,24 +89,20 @@ export class HomeComponent implements OnDestroy {
   }
 
   onPageChange(event: { pageIndex: number; pageSize: number }): void {
-    console.log(event);
     this.pageNumber = event.pageIndex;
     this.pageSize = event.pageSize;
-    this.getProducts(event.pageIndex, event.pageSize);
-    const startIndex = event.pageIndex * event.pageSize;
-    const endIndex = startIndex + event.pageSize;
-    this.updatePaginatedProducts(startIndex, endIndex);
+    this.getProducts();
   }
 
-  updatePaginatedProducts(startIndex: number, endIndex: number) {
-    this.paginatedProducts = this.products.slice(startIndex, endIndex);
+  filterProducts(): void {
+    this.getProducts();
   }
 
-  private getProducts(pageNumber: number, pageSize: number): void {
+  private getProducts(): void {
     this.isLoading = true;
     this._subs$.add(
       this._productService
-        .getProducts(pageNumber, pageSize)
+        .getProducts(this.pageNumber, this.pageSize, this.selectedRating)
         .pipe(
           finalize(() => {
             this.isLoading = false;
@@ -109,6 +112,7 @@ export class HomeComponent implements OnDestroy {
           next: (response) => {
             this.products = response.data;
             this.totalCount = response.totalItems;
+            console.log(this.totalCount);
           },
           error: (error: HttpErrorResponse) => {
             this._errorHandlerService.handleError(error);

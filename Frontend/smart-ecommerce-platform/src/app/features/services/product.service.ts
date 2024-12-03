@@ -22,11 +22,13 @@ export class ProductService {
 
   getProducts(
     pageNumber: number,
-    pageSize: number
+    pageSize: number,
+    minReview: number
   ): Observable<PaginatedResponse<Product>> {
     let params: HttpParams = new HttpParams()
       .set('pageNumber', pageNumber)
-      .set('pageSize', pageSize);
+      .set('pageSize', pageSize)
+      .set('minReview', minReview);
     return this._httpClient.get<PaginatedResponse<Product>>(this._baseUrl, {
       ...this.options,
       params,

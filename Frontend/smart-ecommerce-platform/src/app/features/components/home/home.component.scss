@@ -33,6 +33,47 @@
       margin-top: 20px;
     }
 
+    .filter-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin: 20px auto;
+      max-width: 300px;
+      text-align: center;
+
+      h2 {
+        font-size: 1.5rem;
+        color: green;
+        margin-bottom: 16px;
+      }
+
+      .filter-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+
+        label {
+          font-weight: bold;
+          color: green;
+        }
+
+        select {
+          padding: 0.5rem;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 1rem;
+          transition: border-color 0.3s;
+
+          &:focus {
+            outline: none;
+            border-color: blue;
+          }
+        }
+      }
+    }
+
     .mat-paginator {
       margin-top: 20px;
       display: flex;
