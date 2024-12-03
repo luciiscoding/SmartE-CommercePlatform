@@ -49,7 +49,7 @@ namespace Product.Controllers
          [FromQuery] decimal? minPrice,
          [FromQuery] decimal? maxPrice,
          [FromQuery] int? minReview,
-         [FromQuery] int pageNumber = 1,
+         [FromQuery] int pageNumber = 0,
          [FromQuery] int pageSize = 10)
         {
             var query = new GetAllProductsQuery(type, minPrice, maxPrice, minReview, pageNumber, pageSize);
