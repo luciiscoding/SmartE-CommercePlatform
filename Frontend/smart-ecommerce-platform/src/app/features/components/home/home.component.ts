@@ -139,9 +139,7 @@ export class HomeComponent implements OnDestroy {
     this.showFilters = !this.showFilters;
   }
 
- 
   applyFilters() {
-    console.log(this.filters);
     this.getProducts(this.pageNumber, this.pageSize);
     this.showFilters = false; 
   }
