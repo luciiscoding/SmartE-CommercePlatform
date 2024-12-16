@@ -7,8 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss",
-          "skipTests": false
+          "style": "scss"
         }
       },
       "root": "",
@@ -38,21 +37,33 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "5MB",
-                  "maximumError": "6MB"
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2mb",
-                  "maximumError": "4mb"
+                    "maximumWarning": "100kb",
+                    "maximumError": "200kb"
                 }
               ],
               "outputHashing": "all"
             },
             "development": {
+              "fileReplacements": [
+                {
+                "replace": "src/environments/environment.prod.ts",
+                "with": "src/environments/environment.ts"
+                }
+              ],
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -82,31 +93,25 @@
           }
         },
         "test": {
-             "builder": "@angular-devkit/build-angular:karma",
-             "options": {
-                "main": "src/test.ts",
-                "polyfills": [
-                       "zone.js", 
-                        "zone.js/testing"
-                  ],
-               "tsConfig": "tsconfig.spec.json",
-               "karmaConfig": "karma.conf.js", 
-               "inlineStyleLanguage": "scss",
-               "assets": [
-                   "src/favicon.ico",
-                   "src/assets"
-               ],
-              "styles": [
-               "src/styles.scss"
-               ],
-              "scripts": []
-               }
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": []
           }
-
+        }
       }
     }
-  },
-  "cli": {
-    "analytics": "7d615293-7a89-46ce-a725-8d827433d3e4"
   }
 }
