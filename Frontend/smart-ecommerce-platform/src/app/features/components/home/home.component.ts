@@ -20,7 +20,7 @@ import { EMPTY, finalize, Subscription, switchMap } from 'rxjs';
 export class HomeComponent implements OnDestroy {
   @ViewChild('paginator') paginator: MatPaginator | undefined;
   isLoading: boolean = false;
-
+  title: string = 'Default Title';
   pageNumber: number = 0;
   pageSize: number = 5;
   totalCount: number = 0;
@@ -144,4 +144,10 @@ export class HomeComponent implements OnDestroy {
     this.showFilters = false; 
   }
 }
+
+
+
+  
+
+
 
