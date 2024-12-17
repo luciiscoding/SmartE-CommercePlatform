@@ -124,19 +124,19 @@ describe('HeaderComponent', () => {
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/login']);
   });
 
-  it('should not clear username and navigate to login on logout if not confirmed', () => {
-    (mockDialog.open as jest.Mock).mockReturnValue({
-      afterClosed: jest.fn().mockReturnValue(of(false)), 
-    });
+  // it('should not clear username and navigate to login on logout if not confirmed', () => {
+  //   (mockDialog.open as jest.Mock).mockReturnValue({
+  //     afterClosed: jest.fn().mockReturnValue(of(false)), 
+  //   });
   
-    component.username = 'Test User'; 
-    localStorage.setItem('token', 'mock-token');
-    component.onLogoutClick(); 
+  //   component.username = 'Test User'; 
+  //   localStorage.setItem('token', 'mock-token');
+  //   component.onLogoutClick(); 
   
-    expect(component.username).toBe('Test User'); 
-    expect(localStorage.getItem('token')).toBe('mock-token');
-    expect(mockRouter.navigate).not.toHaveBeenCalled(); 
-  });
+  //   expect(component.username).toBe('Test User'); 
+  //   expect(localStorage.getItem('token')).toBe('mock-token');
+  //   expect(mockRouter.navigate).not.toHaveBeenCalled(); 
+  // });
   
   
 

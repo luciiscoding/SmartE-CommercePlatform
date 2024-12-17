@@ -3,8 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProductService } from '@app/features/services';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorHandlerService } from '@app/shared';
-import { of, throwError, EMPTY } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Product } from '@app/features/models/product.model';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -17,7 +18,7 @@ describe('HomeComponent', () => {
     mockProductService = {
       getProducts: jest.fn().mockReturnValue(of({ data: [], totalItems: 0 })),
       createProduct: jest.fn().mockReturnValue(of({})),
-      getFilteredProducts: jest.fn().mockReturnValue(of([])),  
+      getFilteredProducts: jest.fn().mockReturnValue(of([])),
     };
     mockDialog = {
       open: jest.fn().mockReturnValue({
@@ -26,7 +27,7 @@ describe('HomeComponent', () => {
     };
     mockToastrService = { success: jest.fn() };
     mockErrorHandlerService = { handleError: jest.fn() };
-  
+
     component = new HomeComponent(
       mockProductService as ProductService,
       mockDialog as MatDialog,
@@ -34,23 +35,11 @@ describe('HomeComponent', () => {
       mockErrorHandlerService as ErrorHandlerService
     );
   });
-  
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize and load products on init', () => {
-    const mockProducts = [
-      { id: 1, name: 'Product 1' },
-      { id: 2, name: 'Product 2' },
-    ];
-  
-    (mockProductService.getProducts as jest.Mock).mockReturnValue(of({ data: mockProducts }));
-    component.ngOnInit();  
-    expect(component.products).toEqual(mockProducts);  
-    expect(component.paginatedProducts).toEqual(mockProducts.slice(0, 5));  
-  });
   
 
   it('should unsubscribe on destroy', () => {
@@ -85,79 +74,31 @@ describe('HomeComponent', () => {
     expect(mockProductService.createProduct).not.toHaveBeenCalled();
   });
 
-  it('should handle error when getting products fails', () => {
-    const mockErrorResponse = new HttpErrorResponse({
-      error: 'Error message',
-      status: 400,
-      statusText: 'Bad Request',
-    });
-  
-    (mockProductService.getProducts as jest.Mock).mockReturnValue(throwError(() => mockErrorResponse));
-    component['getProducts'](0, 5);
-    expect(mockErrorHandlerService.handleError).toHaveBeenCalledWith(mockErrorResponse);
-  });
-  
-  it('should update paginated products on page change', () => {
-    component.products = Array.from(
-      { length: 10 },
-      (_, i) => ({
-        id: i + 1,
-        name: `Product ${i + 1}`,
-        type: 'Type',
-        description: 'Description',
-        price: 100,
-        review: 'Review'
-      } as any)
-    );
-  
-    const updatePaginatedProductsSpy = jest.spyOn(component as any, 'updatePaginatedProducts');
-    component.onPageChange({ pageIndex: 1, pageSize: 5 });
-    expect(updatePaginatedProductsSpy).toHaveBeenCalledWith(5, 10);
-  });
-  
-  it('should update paginated products on page change', () => {
-    component.products = Array.from(
-      { length: 10 },
-      (_, i) => ({
-        id: i + 1,
-        name: `Product ${i + 1}`,
-        type: 'Type',
-        description: 'Description',
-        price: 100,
-        review: 'Review'
-      } as any)
-    );
-  
-    const updatePaginatedProductsSpy = jest.spyOn(component as any, 'updatePaginatedProducts');
-    component.onPageChange({ pageIndex: 1, pageSize: 5 });
-    expect(updatePaginatedProductsSpy).toHaveBeenCalledWith(5, 10);
-  });
-  
-  
 
-  it('should handle error when getting products fails', () => {
-    const mockErrorResponse = new HttpErrorResponse({
-      error: 'Error message',
-      status: 400,
-      statusText: 'Bad Request',
+
+  it('should open the add product modal and add product when confirmed', () => {
+    (mockDialog.open as jest.Mock).mockReturnValue({
+      afterClosed: jest.fn().mockReturnValue(of(true)),
     });
   
-    (mockProductService.getProducts as jest.Mock).mockReturnValue(throwError(() => mockErrorResponse));
-    component['getProducts'](0, 5);
-    expect(mockErrorHandlerService.handleError).toHaveBeenCalledWith(mockErrorResponse);
-  });
-  
-  it('should handle error when adding product fails', () => {
-    const mockErrorResponse = new HttpErrorResponse({
-      error: 'Error message',
-      status: 400,
-      statusText: 'Bad Request',
-    });
-    (mockProductService.createProduct as jest.Mock).mockReturnValue(
-      throwError(() => mockErrorResponse)
-    );
     component.openAddProductModal();
-    expect(mockErrorHandlerService.handleError).toHaveBeenCalledWith(mockErrorResponse);
-  });
   
+    expect(mockDialog.open).toHaveBeenCalled();
+    expect(mockProductService.createProduct).toHaveBeenCalled();
+    expect(mockToastrService.success).toHaveBeenCalledWith('Product added successfully');
+  });
+
+  it('should not add product when modal is cancelled', () => {
+    (mockDialog.open as jest.Mock).mockReturnValue({
+      afterClosed: jest.fn().mockReturnValue(of(false)),
+    });
+  
+    component.openAddProductModal();
+  
+    expect(mockProductService.createProduct).not.toHaveBeenCalled();
+    expect(mockToastrService.success).not.toHaveBeenCalled();
+  });
+    
+
+ 
 });

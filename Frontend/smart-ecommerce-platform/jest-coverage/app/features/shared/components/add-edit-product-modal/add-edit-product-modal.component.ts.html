@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">31.25% </span>
+                <span class="strong">81.25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/16</span>
+                <span class='fraction'>13/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">28.57% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>2/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>2/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">26.66% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/15</span>
+                <span class='fraction'>12/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -136,7 +136,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -146,20 +146,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -198,7 +198,7 @@ import { Product } from '@app/features/models';
   styleUrls: ['./add-edit-product-modal.component.scss'],
 })
 export class AddEditProductModalComponent {
-<span class="cstat-no" title="statement not covered" >  addProductForm: FormGroup = new FormGroup({</span>
+  addProductForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
     type: new FormControl('', [Validators.required]),
     description: new FormControl('', [
@@ -208,26 +208,26 @@ export class AddEditProductModalComponent {
     price: new FormControl('', [Validators.required]),
     review: new FormControl('', [Validators.required]),
   });
-<span class="cstat-no" title="statement not covered" >  modalTitle: string = '';</span>
-<span class="fstat-no" title="function not covered" >  constructor(</span>
-    private <span class="cstat-no" title="statement not covered" >_dialogRef: MatDialogRef&lt;AddEditProductModalComponent&gt;,</span>
+  modalTitle: string = '';
+  constructor(
+    private _dialogRef: MatDialogRef&lt;AddEditProductModalComponent&gt;,
     @Inject(MAT_DIALOG_DATA)
-    private <span class="cstat-no" title="statement not covered" >_data: { product: Product; modalTitle: string }</span>
+    private _data: { product: Product; modalTitle: string }
   ) {
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (_data.product) {</span>
-<span class="cstat-no" title="statement not covered" >      this.addProductForm.patchValue(_data.product);</span>
+    if (_data.product) {
+      this.addProductForm.patchValue(_data.product);
     }
-<span class="cstat-no" title="statement not covered" >    this.modalTitle = _data.modalTitle;</span>
+    this.modalTitle = _data.modalTitle;
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  isFormInvalid(</span>): boolean {
-<span class="cstat-no" title="statement not covered" >    return (</span>
+  isFormInvalid(): boolean {
+    return (
       this.addProductForm.invalid ||
-      (this._data?.product === this.addProductForm.get('name')?.value &amp;&amp;
-        this._data?.product === this.addProductForm.get('type')?.value &amp;&amp;
-        this._data?.product === this.addProductForm.get('description')?.value &amp;&amp;
-        this._data?.product === this.addProductForm.get('price')?.value &amp;&amp;
-        this._data?.product === this.addProductForm.get('review')?.value)
+      (<span class="branch-1 cbranch-no" title="branch not covered" >this._data?.product === this.addProductForm.get('name')?.value </span>&amp;&amp;
+<span class="branch-2 cbranch-no" title="branch not covered" >        this._data?.product === this.addProductForm.get('type')?.value </span>&amp;&amp;
+<span class="branch-3 cbranch-no" title="branch not covered" >        this._data?.product === this.addProductForm.get('description')?.value </span>&amp;&amp;
+<span class="branch-4 cbranch-no" title="branch not covered" >        this._data?.product === this.addProductForm.get('price')?.value </span>&amp;&amp;
+<span class="branch-5 cbranch-no" title="branch not covered" >        this._data?.product === this.addProductForm.get('review')?.value)</span>
     );
   }
 &nbsp;
@@ -256,7 +256,7 @@ export class AddEditProductModalComponent {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-12-16T22:52:34.051Z
+                at 2024-12-17T12:11:04.086Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>
